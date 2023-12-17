@@ -43,6 +43,10 @@
   line-height: 16px;
 }
 
+.footer__link:hover {
+  color: #a0a0a0;
+}
+
 @media (max-width: 768px) {
   .footer{
     padding: 79px 30px 20px;

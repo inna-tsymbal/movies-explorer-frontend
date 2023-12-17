@@ -2,9 +2,9 @@ import './FilterCheckbox.css';
 
 export default function FilterCheckbox () {
   return (
-    <div className='filter-checkbox'>
-      <button className='filter-checkbox__button'></button>
+    <form className='filter-checkbox'>
+      <button className='filter-checkbox__button' type='button'></button>
       <article className='filter-checkbox__text'>Короткометражки</article>
-    </div>
+    </form>
   )
 }
