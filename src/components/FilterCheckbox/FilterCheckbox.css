@@ -1,0 +1,47 @@
+.filter-checkbox {
+  display: flex;
+  gap: 14px;
+  position: absolute;
+  right: 30px;
+}
+  
+.filter-checkbox__button {
+  background: url(../../images/checkbox.svg);
+  border: 0;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+}
+  
+.filter-checkbox__button_disabled {
+  background: url(../../images/checkbox-disabled.svg);
+  border: 0;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+}
+  
+.filter-checkbox__text {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+}
+  
+@media (max-width: 768px) {
+  .filter-checkbox {
+    right: 20px;
+  }
+}
+  
+@media (max-width: 510px) {
+  .filter-checkbox {
+    right: auto;
+    top: 117px;
+  }
+}
+  
+@media (max-width: 425px) {
+  .filter-checkbox__text {
+    font-size: 11px;
+  }
+}

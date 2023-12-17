@@ -1,0 +1,106 @@
+.header {
+  padding: 0 70px;
+  display: flex;
+  align-items: center;
+  height: 74px;
+  background: #FFF;
+  justify-content: space-between;
+}
+  
+.header_color_pink {
+  background: #F3C1F8;
+}
+  
+.logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+  
+.header__nav-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+  
+.header__auth-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+  
+.header__nav {
+  display: flex;
+  gap: 20px
+}
+  
+.header__link {
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 0;
+   padding: 0;
+}
+  
+.header__link_active {
+  font-weight: 500;
+}
+  
+.header__burger-button {
+  background: url(../../images/burger-menu-icon.svg);
+  border: 0;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: none;
+}
+  
+.header__auth {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+  
+.header__auth-button {
+  color: #000;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+  
+.header__auth-button_enter {
+  display: inline-flex;
+  color: #fff;
+  width: 76px;
+  height: 32px;
+  border-radius: 3px;
+  background: #000;
+  align-items: center;
+  justify-content: center;
+}
+  
+@media (max-width: 768px) {
+  .header {
+    padding: 0 30px;
+  }
+  
+  .header__burger-button {
+    display: block;
+  }
+  
+  .header__nav-container {
+    display: none;
+  }
+}
+  
+@media (max-width: 425px) {
+  .header {
+    padding: 0 14px;
+  }
+}
