@@ -1,5 +1,4 @@
 const url = "https://api.diplom.innatsymbal.nomoredomainsmonster.ru";
-// export const url = 'http://localhost:3003';
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
@@ -26,11 +25,12 @@ export const login = (email, password) => {
   }).then(checkResponse)
 };
 
-export const getContent = () => {
+export const getContent = (token) => {
     return fetch(`${url}/users/me`, {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       }
     })
       .then(checkResponse);

@@ -1,7 +1,6 @@
 /* eslint-disable no-useless-escape */
 export const NAME_REGEX = /^[A-Za-zА-Яа-яЁё\s\-]+$/;
 export const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
-
 export const SCREEN_M = 650;
 export const SCREEN_L = 1028;
 

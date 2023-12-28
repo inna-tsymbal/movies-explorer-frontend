@@ -17,7 +17,6 @@ export const useResize = () => {
       };
     };
 
-
     window.addEventListener('resize', timeOut(handleResize, 1000));
     return () => {
       window.removeEventListener('resize', handleResize);
