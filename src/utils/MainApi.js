@@ -11,57 +11,52 @@ class MainApi {
         return fetch(url, options).then(this._checkResponse);
     }
   
-    getSavedMovies(token) {
+    getSavedMovies() {
       return this._request(`${this._url}/movies`, {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
         }
       })
     }
   
-    createSavedMovie(dataMovie, token) {
+    createSavedMovie(dataMovie) {
         return this._request(`${this._url}/movies`, {
             credentials: 'include',
             method: 'POST',
             body: JSON.stringify(dataMovie),
             headers: {
               'Content-Type': 'application/json',
-              authorization: `Bearer ${token}`,
             }
         })
     }
   
-    deleteMovie(id, token) {
+    deleteMovie(id) {
         return this._request(`${this._url}/movies/${id}`, {
             credentials: 'include',
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
-              authorization: `Bearer ${token}`,
             }
         })
     }
   
-    getUser(token) {
+    getUser() {
         return this._request(`${this._url}/users/me`, {
             credentials: 'include',
             headers: {
               'Content-Type': 'application/json',
-              authorization: `Bearer ${token}`,
             }
         })
     }
   
-    updateUser(dataUser, token) {
+    updateUser(dataUser) {
         return this._request(`${this._url}/users/me`, {
             credentials: 'include',
             method: 'PATCH',
             body: JSON.stringify(dataUser),
             headers: {
               'Content-Type': 'application/json',
-              authorization: `Bearer ${token}`,
             }
         })
     }

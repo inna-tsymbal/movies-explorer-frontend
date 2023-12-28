@@ -48,12 +48,10 @@
   
   .movies-card-list__container {
     grid-auto-rows: 200px;
-  }
-  
-  .movies-card-list__container {
     gap: 38px;
   }
   
+
   .movies-card-list__button {
     margin-top: 60px;
     max-width: 240px;

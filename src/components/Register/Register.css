@@ -132,6 +132,11 @@
   padding: 0;
   cursor: pointer;
   text-decoration: none;
+  transition: opacity 0.4s ease-out;
+}
+
+.form__link:hover {
+  opacity: 0.5;
 }
 
 @media (max-width: 425px) {

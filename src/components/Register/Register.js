@@ -27,13 +27,10 @@ export default function Register ({registration, loggedIn}) {
   function handleSubmit(e) {
     e.preventDefault();
     setFormError('');
-    const { name, email, password } = values
-    registration(name, email, password)
+    registration(values.name, values.email, values.password)
       .then(resetForm())
       .catch(err => setFormError(err));
   }
-
-
 
   return (
     <div className='container'>

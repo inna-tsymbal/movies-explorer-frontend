@@ -25,21 +25,21 @@ export default function Movies ({
       <Header openNav={openNav} loggedIn={loggedIn} />
       <main className='movies'>
       <SearchForm 
-      submitHandler={submitHandler}
-      searchError={searchError}
-      activeCheckbox={activeCheckbox}
-      toggleCheckbox={toggleCheckbox}
+          submitHandler={submitHandler}
+          searchError={searchError}
+          activeCheckbox={activeCheckbox}
+          toggleCheckbox={toggleCheckbox}
       />
       {isLoading && <Preloader />}
       <div className='movies__container'>
           <p className='movies__text'>{moviesError}</p>
       </div>
       <MoviesCardList 
-      movies={movies}
-      saveMovie={saveMovie}
-      savedMovies={savedMovies}
-      showMoreCards={showMoreCards}
-      isHiddenMoreButton={isHiddenMoreButton}
+          movies={movies}
+          saveMovie={saveMovie}
+          savedMovies={savedMovies}
+          showMoreCards={showMoreCards}
+          isHiddenMoreButton={isHiddenMoreButton}
       />
       </main>
       <Footer />

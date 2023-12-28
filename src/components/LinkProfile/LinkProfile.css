@@ -10,6 +10,11 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
+  transition: opacity 0.4s ease-out;
+}
+
+.link-profile__text:hover {
+  opacity: 0.5;
 }
   
 .link-profile__icon {
@@ -23,4 +28,9 @@
   border-radius: 6px;
   margin-left: 13px;
   padding: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.link-profile__icon:hover {
+  opacity: 0.5;
 }

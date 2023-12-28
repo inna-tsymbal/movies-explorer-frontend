@@ -4,18 +4,14 @@ import { useLocation } from 'react-router-dom';
 import React from 'react';
 import { useResize } from '../../utils/useResize';
 
-export default function MoviesCardList ({ movies, saveMovie, savedMovies, deleteMovie, }) {
+export default function MoviesCardList ({ movies, saveMovie, savedMovies, deleteMovie }) {
   const location = useLocation();
   const locationOfSavedMovies = location.pathname === '/saved-movies';
-
   const { isScreenS, isScreenM, isScreenL } = useResize();
-
   const [amountMovies, setAmountMovies] = React.useState(0);
   const [addedMovies, setAddedMovies] = React.useState(0);
   const moviesError = false
 
-
-  // Количество фильмов на странице в зависимости от ширины экрана
   React.useEffect(() => {
     if (isScreenL) {
       setAmountMovies(12);
@@ -34,9 +30,7 @@ export default function MoviesCardList ({ movies, saveMovie, savedMovies, delete
     setAmountMovies(amt => amt + addedMovies)
   };
 
-  // Условие видимости кнопки
   const isVisibleButton = movies.length > amountMovies && !locationOfSavedMovies;
-
 
   return (
     <section className='movies-card-list'>

@@ -1,7 +1,6 @@
 import './MoviesCard.css';
 
-
-export default function MoviesCard ({
+ export default function MovieCard ({
   movie,
   savedMovies,
   saveMovie,
@@ -61,17 +60,17 @@ export default function MoviesCard ({
   }
 
   return (
-    <section className='movies-card'>
-      <div className='movies-card__image-container'>
-      <a className='movie-card__link' href={dataMovie.trailerLink} target='_blank' rel='noreferrer'>
+    <div className='movie-card'>
+      <div className='movie-card__image-container'>
+        <a className='movie-card__link' href={dataMovie.trailerLink} target='_blank' rel='noreferrer'>
           <img className='movie-card__image' src={dataMovie.image} alt={dataMovie.nameRU}/>
         </a>
-        <button className={`movie-card__save-button ${isSavedMovie ? 'movie-card__save-button_type_saved' : ''} ${locationOfSavedMovies ? 'movie-card__save-button_type_delete' : ''}`} type='submit' onClick={handleSave}>{!isSavedMovie && !locationOfSavedMovies && 'Сохранить'}</button>
+        <button className={`movie-card__save-button ${isSavedMovie ? 'movie-card__save-button_type_saved' : ''} ${locationOfSavedMovies ? 'movie-card__save-button_type_delete' : ''}`} onClick={handleSave}>{!isSavedMovie && !locationOfSavedMovies && 'Сохранить'}</button>
       </div>
-      <div className='movies-card__info'>
-        <h2 className='movies-card__title'>{dataMovie.nameRU}</h2>
-        <article className='movies-card__time'>{correctionDuration(dataMovie.duration)}</article>
+      <div className='movie-card__info'>
+        <h3 className='movie-card__title'>{dataMovie.nameRU}</h3>
+        <article className='movie-card__duration'>{correctionDuration(dataMovie.duration)}</article>
       </div>
-    </section>
+    </div>
   )
 }

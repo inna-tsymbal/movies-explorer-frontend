@@ -1,10 +1,6 @@
-/** подключение файла normalize */
 @import url(./vendor/normalize.css);
-
-/** подключение шрифтов */
 @import url(./vendor/fonts/fonts.css);
 
-/** подключение стилей страницы */
 .page {
   max-width: 1800px;
   min-width: 320px;

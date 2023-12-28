@@ -27,7 +27,7 @@
 
 .profile__input-container {
   position: relative;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #E8E8E8;
   display: flex;
   justify-content: space-between;
   padding: 17px 0;
@@ -48,6 +48,7 @@
 }
 
 .profile__input-title {
+  /*position: absolute;*/
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;
@@ -55,28 +56,28 @@
   padding: 0;
 }
 
-.profile__button-edit {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 16px;
-  border: 0;
-  background: 0;
-  margin: 0 0 16px;
-  padding: 0;
-  cursor: pointer;
-  }
-  
 .profile__input-error {
   position: absolute;
   top: 32px;
-  color: #ff4062;
+  color: #FF4062;
   font-size: 11px;
   font-weight: 400;
   line-height: 13px;
 }
 
+.profile__button-edit {
+font-size: 13px;
+font-weight: 400;
+line-height: 16px;
+border: 0;
+background: 0;
+margin: 0 0 16px;
+padding: 0;
+cursor: pointer;
+}
+
 .profile__button-exit {
-  color: #ff4062;
+  color: #FF4062;
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;
@@ -86,12 +87,12 @@
   padding: 0;
   cursor: pointer;
 }
-  
+
 .profile__button-save {
   border-radius: 3px;
   background: #000;
   border: 0;
-  color: #fff;
+  color: #FFF;
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
@@ -100,23 +101,23 @@
   width: 100%;
   cursor: pointer;
 }
-  
+
 .profile__button-save:disabled {
-  background: #f8f8f8;
-  color: #c2c2c2;
+  background: #F8F8F8;
+  color: #C2C2C2;
   cursor: default;
 }
-  
+
 .profile__request-error {
   position: absolute;
   top: 480px;
-  color: #ff4062;
+  color: #FF004C;
   text-align: center;
   font-size: 11px;
   font-weight: 400;
   line-height: 13px;
 }
-  
+
 .profile__request-error_no-error {
   color: #000;
 }

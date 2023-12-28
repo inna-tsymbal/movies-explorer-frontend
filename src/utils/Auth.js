@@ -25,12 +25,11 @@ export const login = (email, password) => {
   }).then(checkResponse)
 };
 
-export const getContent = (token) => {
+export const getContent = () => {
     return fetch(`${url}/users/me`, {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       }
     })
       .then(checkResponse);
