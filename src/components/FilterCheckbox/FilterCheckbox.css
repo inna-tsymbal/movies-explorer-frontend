@@ -13,8 +13,8 @@
   cursor: pointer;
 }
   
-.filter-checkbox__button_disabled {
-  background: url(../../images/checkbox-disabled.svg);
+.filter-checkbox__button_inactive {
+  background: url(../../images/checkbox-inactive.svg);
   border: 0;
   width: 36px;
   height: 20px;

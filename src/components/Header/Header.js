@@ -3,15 +3,13 @@ import logo from '../../images/logo.svg';
 import LinkProfile from '../LinkProfile/LinkProfile';
 import { Link, NavLink } from 'react-router-dom';
 
-const isLoggedIn = true;
-
-export default function Header ({ isMainPage, isOpen }) {
+export default function Header ({ isMainPage, openNav, loggedIn }) {
   return (
     <header className={`header ${isMainPage ? 'header_color_pink' : ''}`}>
       <Link to='/'>
         <img className='logo' src={logo} alt='Логотип'/>
       </Link>
-      {isLoggedIn ? (
+      {loggedIn ? (
         <>
           <div className='header__nav-container'>
             <nav className='header__nav'>
@@ -20,7 +18,7 @@ export default function Header ({ isMainPage, isOpen }) {
             </nav>
             <LinkProfile />
           </div>
-          <div className='header__burger-button' onClick={isOpen}></div>
+          <div className='header__burger-button' onClick={openNav}></div>
         </>
       ) : (
         <div className='header__auth-container'>

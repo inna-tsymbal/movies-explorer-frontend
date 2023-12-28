@@ -7,10 +7,10 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 
-export default function Main ({isOpen}) {
+export default function Main ({openNav, loggedIn}) {
   return (
     <>
-      <Header isMainPage={true} openNav={isOpen} />
+      <Header isMainPage={true} openNav={openNav} loggedIn={loggedIn} />
       <Promo/>
       <NavTab/>
       <AboutProject/>
