@@ -13,8 +13,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-import {moviesApi} from '../../utils/moviesApi';
-import {mainApi} from '../../utils/mainApi';
+import {moviesApi} from '../../utils/MoviesApi';
+import {mainApi} from '../../utils/MainApi';
 import {authApi} from '../../utils/authApi';
 import {beatfilmMoviesApiURL} from "../../utils/constants";
 

@@ -1,6 +1,6 @@
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
-import {convertor} from "../../utils/convertor";
+import { convertor } from "../../utils/convertor";
 
 export default function MoviesCard({name, duration, link, trailerLink, onLike, onDelete, currentMovie, savedMovies}) {
   const location = useLocation();
