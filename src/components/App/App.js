@@ -7,15 +7,15 @@ import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import ErrorPage from "../ErrorPage/ErrorPage";
-import {CurrentUserContext} from '../../contexts/CurrentUserContext'
+import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import { WindowSizeProvider } from "../../contexts/WindowSizeContext";
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-import {moviesApi} from '../../utils/moviesApi'
-import {mainApi} from '../../utils/mainApi'
-import {authApi} from '../../utils/authApi'
+import {moviesApi} from '../../utils/moviesApi';
+import {mainApi} from '../../utils/mainApi';
+import {authApi} from '../../utils/authApi';
 import {beatfilmMoviesApiURL} from "../../utils/constants";
 
 export default function App() {
@@ -75,7 +75,7 @@ export default function App() {
         }
       })
       .catch((err) => {
-        console.log(`There is an error while logging in, ${err}`);
+        console.log(`Ошибка, ${err}`);
         setServerError(`При логине произошла ошибка: ${err}`);
       })
   }
