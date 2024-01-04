@@ -1,0 +1,10 @@
+export const beatfilmMoviesApiURL = 'https://api.nomoreparties.co'
+export const EMAIL_REGEX = "^\\S+@\\S+\\.\\S+$";
+export const shortMovieDuration = 40;
+export const twoCardsToAdd = 2;
+export const threeCardsToAdd = 3;
+export const fourCardsToAdd = 4;
+export const sixteenCardsToShow = 16;
+export const twelveCardsToShow = 12;
+export const eightCardsToShow = 8;
+export const fiveCardsToShow = 5;

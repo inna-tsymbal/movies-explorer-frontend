@@ -1,0 +1,45 @@
+.header {
+  margin: 0 auto;
+  background-color: #f3c1f8;
+  width: 100%;
+}
+
+.header_color-almost-white {
+  background-color: #fff;
+}
+
+.header_color-white {
+  background-color: #fff;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 70px;
+}
+
+.header__logo-link {
+  height: 38px;
+  transition: all 0.3s linear;
+}
+
+.header__logo-link:hover {
+  opacity: 0.8;
+}
+
+.header__logo {
+  width: 38px;
+}
+
+@media screen and (max-width: 768px) {
+  .header__container {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header__container {
+    padding: 18px 14px;
+  }
+}
