@@ -1,33 +1,28 @@
 import './Header.css';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import LinkProfile from '../LinkProfile/LinkProfile';
-import { Link, NavLink } from 'react-router-dom';
+import Navigation from '../Navigation/Navigation';
 
-export default function Header ({ isMainPage, openNav, loggedIn }) {
+export default function Header({ isLoggedIn }) {
+  const location = useLocation();
+  const rootPath = "/";
+
+  let headerClassName = "header";
+  if (location.pathname === '/profile') {
+    headerClassName = "header header_color-white";
+  } else if (location.pathname !== '/') {
+    headerClassName = "header header_color-almost-white";
+  }
+
   return (
-    <header className={`header ${isMainPage ? 'header_color_pink' : ''}`}>
-      <Link to='/'>
-        <img className='logo' src={logo} alt='Логотип'/>
-      </Link>
-      {loggedIn ? (
-        <>
-          <div className='header__nav-container'>
-            <nav className='header__nav'>
-              <NavLink className={({isActive}) => `header__link ${isActive ? 'header__link_active' : '' }`} to='/movies'>Фильмы</NavLink>
-              <NavLink className={({isActive}) => `header__link ${isActive ? 'header__link_active' : '' }`} to='/saved-movies'>Сохранённые фильмы</NavLink>
-            </nav>
-            <LinkProfile />
-          </div>
-          <div className='header__burger-button' onClick={openNav}></div>
-        </>
-      ) : (
-        <div className='header__auth-container'>
-          <nav className='header__auth'>
-            <Link to='/signup' className='header__auth-button'>Регистрация</Link>
-            <Link to='/signin' className='header__auth-button header__auth-button_enter'>Войти</Link>
-          </nav>
-        </div>
-      )}
+    <header className={headerClassName}>
+      <div className="header__container">
+        <Link className="header__logo-link" to={rootPath}>
+          <img className="header__logo" src={logo} alt="Логотип" />
+        </Link>
+        <Navigation isLoggedIn={isLoggedIn} />
+      </div>
     </header>
-  )
-}
+  );
+};

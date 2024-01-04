@@ -1,19 +1,34 @@
-import { NavLink } from 'react-router-dom';
 import './Navigation.css';
-import LinkProfile from '../LinkProfile/LinkProfile';
+import React, {useState, useEffect} from "react";
+import { Link } from "react-router-dom";
+import NavPanelRegistered from "../NavPanelRegistered/NavPanelRegistered";
+import BurgerOpened from "../BurgerOpened/BurgerOpened";
+import { useWindowSize } from "../../contexts/WindowSizeContext";
 
-export default function Navigation ({isOpen, closeNav}) {
-  return (
-    <div className={`navigation ${isOpen ? 'navigation_opened' : ''}`}>
-      <div className='navigation__container'>
-        <button className='navigation__close-button' type='button' onClick={closeNav}></button>
-        <nav className='navigation__links'>
-          <NavLink to='/' className={({isActive}) => `navigation__link ${isActive ? 'navigation__link_active' : '' }`}>Главная</NavLink>
-          <NavLink to='/movies' className={({isActive}) => `navigation__link ${isActive ? 'navigation__link_active' : '' }`}>Фильмы</NavLink>
-          <NavLink to='/saved-movies' className={({isActive}) => `navigation__link ${isActive ? 'navigation__link_active' : '' }`}>Сохраненные фильмы</NavLink>
-        </nav>
-        <LinkProfile />
-      </div>
-    </div>
-  )
-}
+export default function Navigation({ isLoggedIn }) {
+  const [burgerOpened, setBurgerOpened] = useState(false);
+  const handleMenu = () => { setBurgerOpened(!burgerOpened); };
+  const { isDesktop } = useWindowSize();
+
+  useEffect(() => {
+    if (isDesktop) {
+      setBurgerOpened(false);
+    }
+  }, [isDesktop]);
+
+  return isLoggedIn ? (
+    <>
+      {isDesktop ? (
+        <NavPanelRegistered isDesktop={isDesktop} />
+      ) : (
+        <button className="burger-menu-btn" type="button" onClick={handleMenu}></button>
+      )}
+      {!isDesktop && <BurgerOpened burgerOpened={burgerOpened} onCloseBurger={handleMenu} />}
+    </>
+  ) : (
+    <nav className="nav-default">
+      <Link className="nav-default__link" to="/signup" >Регистрация</Link>
+      <Link className="nav-default__link nav-default__link-btn" to="/signin" >Войти</Link>
+    </nav>
+  );
+};

@@ -1,122 +1,45 @@
 .header {
-  padding: 0 70px;
+  margin: 0 auto;
+  background-color: #f3c1f8;
+  width: 100%;
+}
+
+.header_color-almost-white {
+  background-color: #fff;
+}
+
+.header_color-white {
+  background-color: #fff;
+}
+
+.header__container {
   display: flex;
   align-items: center;
-  height: 74px;
-  background: #fff;
   justify-content: space-between;
+  padding: 18px 70px;
 }
 
-.header_color_pink {
-  background: #f3c2f8;
+.header__logo-link {
+  height: 38px;
+  transition: all 0.3s linear;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: opacity 0.4s ease-out;
+.header__logo-link:hover {
+  opacity: 0.8;
 }
 
-.logo:hover {
-  opacity: 0.5;
+.header__logo {
+  width: 38px;
 }
 
-.header__nav-container {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-}
-
-.header__auth-container {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-}
-
-.header__nav {
-  display: flex;
-  gap: 20px
-}
-
-.header__link {
-  color: #000;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  margin: 0;
-  padding: 0;
-  transition: opacity 0.4s ease-out;
-}
-
-.header__link:hover {
-  opacity: 0.5;
-}
-
-.header__link_active {
-  font-weight: 500;
-}
-
-.header__burger-button {
-  background: url(../../images/burger-menu-icon.svg);
-  border: 0;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  display: none;
-}
-
-.header__auth {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.header__auth-button {
-  color: #000;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.header__auth-button:hover {
-  opacity: 0.5;
-}
-
-.header__auth-button_enter {
-  display: inline-flex;
-  color: #fff;
-  width: 54px;
-  height: 26px;
-  border-radius: 3px;
-  background: #000;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 768px) {
-  .header {
-    padding: 0 30px;
-  }
-
-  .header__burger-button {
-    display: block;
-  }
-
-  .header__nav-container {
-    display: none;
+@media screen and (max-width: 768px) {
+  .header__container {
+    padding: 18px 30px;
   }
 }
 
-@media (max-width: 425px) {
-  .header {
-    padding: 0 14px;
+@media screen and (max-width: 450px) {
+  .header__container {
+    padding: 18px 14px;
   }
 }

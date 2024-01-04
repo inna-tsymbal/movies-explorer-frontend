@@ -13,38 +13,38 @@
   font-weight: 400;
   line-height: 27px;
   letter-spacing: -0.88px;
-  }
+}
   
-  .about-project__content {
-    display: grid;
-    grid-template: 1fr / repeat(2, 1fr);
-    margin: 70px 0 0 0;
-    gap: 40px;
+.about-project__content {
+  display: grid;
+  grid-template: 1fr / repeat(2, 1fr);
+  margin: 70px 0 0 0;
+  gap: 40px;
 }
 
 .about-project__section {
-    max-width: 550px;
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
 }
 
 .about-project__subtitle {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.8px;
-    margin: 0;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+  margin: 0;
 }
 
 
 .about-project__transfer {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    margin: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
 }
   
 .about-project__period {
@@ -83,14 +83,13 @@
     padding: 90px 50px;
   }
   
-
   .about-project__section {
     gap: 18px;
-}
-
-.about-project__content {
+  }
+  
+  .about-project__content {
     gap: 30px;
-}
+  }
   
   .about-project__period {
     margin-top: 93px;
@@ -101,7 +100,7 @@
   .about-project {
     padding: 70px 18px;
   }
-  
+
   .about-project__title {
     font-size: 18px;
     line-height: 22px;
@@ -113,21 +112,21 @@
     grid-template: 1fr / repeat(1, 1fr);
     margin: 60px 0 0 0;
     gap: 56px;
-}
-
-.about-project__section {
+  }
+  
+  .about-project__section {
     gap: 16px;
-}
-
-.about-project__subtitle {
+  }
+  
+  .about-project__subtitle {
     font-size: 18px;
     letter-spacing: -0.72px;
-}
-
-.about-project__transfer {
+  }
+  
+  .about-project__transfer {
     font-size: 11px;
     line-height: 16px;
-}
+  }
   
   .about-project__period {
     grid-template-columns: minmax(100px, 1fr) 4fr;

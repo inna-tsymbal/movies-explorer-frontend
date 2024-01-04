@@ -1,110 +1,107 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
 import './Profile.css';
-import Header from '../Header/Header';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { NAME_REGEX, EMAIL_REGEX } from '../../utils/constants';
-import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import React, {useContext, useState, useEffect} from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
+import useCustomFormValidation from '../../utils/useCustomFormValidation';
+import { EMAIL_REGEX } from '../../utils/constants'
 
-function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
-  const {currentUser, setCurrentUser} = React.useContext(CurrentUserContext);
+export default function Profile({ handleLogOut, onUpdateUser, serverError, resetServerErrors, isDataUpdated }) {
+  const currentUser = useContext(CurrentUserContext)
+  const [showBtnSave, setShowBtnSave] = useState(false);
+  const [isInputChanged, setIsInputChanged] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const [isSaving, setIsSaving] = React.useState(false);
-  
-  const [requestMessage, setRequestMessage] = React.useState('');
-  const [success, setSuccess] = React.useState(false);
+  const {
+    formValues,
+    setFormValues,
+    handleFormChange,
+    formErrors,
+    isFormValid,
+    setIsFormValid
+  } = useCustomFormValidation();
 
-  const { name, email } = currentUser;
+  useEffect(() => {
+    resetServerErrors();
+  }, [])
 
-  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
-
-  const { profileName, profileEmail } = values;
-  
-
-  React.useEffect(() => {
-    resetForm({profileName: name, profileEmail: email})
-  }, [name, email]);
-
+  useEffect(() => {
+    if (currentUser) {
+      setFormValues(currentUser);
+      setIsFormValid(true);
+    }
+  }, [currentUser, setIsFormValid, setFormValues]);
 
   function handleSubmit(e) {
+    e.preventDefault()
+    onUpdateUser({ name: formValues.name, email: formValues.email });
+    setShowBtnSave(false)
+  }
+
+  useEffect(() => {
+    const hasChanges = formValues.name !== currentUser.name || formValues.email !== currentUser.email;
+    hasChanges ? setIsInputChanged(true) :  setIsInputChanged(false);
+  }, [formValues, currentUser]);
+
+  useEffect(() => {
+    if (isDataUpdated) {
+      setShowBtnSave(false);
+      setShowConfirmation(true);
+    }
+  }, [isDataUpdated, serverError, onUpdateUser]);
+
+  const handleBtnEditClick = (e) => {
     e.preventDefault();
-    setRequestMessage('');
-    setSuccess(false);
-    
-    console.log(profileName, profileEmail)
-    updateProfile(profileName, profileEmail)
-      .then((res) => {
-        console.log(res)
-        setCurrentUser({name: profileName, email: profileEmail})
-        setIsSaving(false);
-        setSuccess(true);
-        setRequestMessage('Аккаунт обновлен');
-      })
-      .catch((err) => setRequestMessage(err));
-    setIsSaving(false);
-  }
-
-  function toggleButton() {
-    setIsSaving(true)
-  }
-
-  function isDisabled() {
-    if (name === profileName && email === profileEmail) {
-      return true;
-    } else {
-      return !isValid;
-    };
+    setShowBtnSave(true);
+    setShowConfirmation(false);
+    resetServerErrors();
   };
 
   return (
-    <>
-      <Header openNav={openNav} loggedIn={loggedIn} />
-      <main className='profile'>
-        <h1 className='profile__name'>{`Привет, ${currentUser.name}!`}</h1>
-        <form className='profile__content' name='profile' onSubmit={handleSubmit}>
-          <div className='profile__input-container'>
-            <article className='profile__input-title'>Имя</article>
-            <input
- className='profile__input'
- type='text'
- name='profileName'
- minLength='2'
- maxLength='30'
- placeholder='Имя'
- value={values['profileName'] || ''}
- pattern={NAME_REGEX.source}
- onChange={handleChange}
- required
+    <section className="profile">
+      <div className="profile__container" >
+        <h1 className="profile__title">Привет, {currentUser.name}!</h1>
+        <form className="profile__form" name="profile" onSubmit={handleSubmit} >
+          <label className="profile__label">Имя
+            <input className="profile__input" value={formValues.name || ''} placeholder="Имя" name="name" type="text"
+                   minLength={2} maxLength={30} required onChange={handleFormChange} disabled={!showBtnSave}/>
+          </label>
+          <span className="profile__input-error">{formErrors.name}</span>
+          <label className="profile__label">E-mail
+            <input className="profile__input" value={formValues.email || ''} placeholder="Email" name="email"
+                   type="email" required onChange={handleFormChange} disabled={!showBtnSave}
+                   pattern={EMAIL_REGEX}
             />
-            <span className='profile__input-error'>{errors['profileName']}</span>
-          </div>
-          <div className='profile__input-container'>
-            <article className='profile__input-title'>E-mail</article>
-            <input
-                            className='profile__input'
-                            type='email'
-                            name='profileEmail'
-                            placeholder='E-mail'
-                            value={values['profileEmail'] || ''}
-                            pattern={EMAIL_REGEX.source}
-                            onChange={handleChange}
-                            required
-              />
-              <span className='profile__input-error'>{errors['profileEmail']}</span>
-          </div>
-        </form>
-        <span className={`profile__request-error ${success && 'profile__request-error_no-error'}`}>{requestMessage}</span>
-        {!isSaving ? (
-        <button className='profile__button-edit' onClick={toggleButton} type='submit'>Редактировать</button>
-        ) : (
-        <button className='profile__button-save' disabled={isDisabled()} onClick={handleSubmit} type='submit'>Сохранить</button>
-        )}
-        {!isSaving && (
-        <button className='profile__button profile__button-exit' onClick={handleLogout} type='submit'>Выйти из аккаунта</button>
-        )}
-        </main>
-    </>
-  )
-}
+          </label>
+          <span className="profile__input-error">{formErrors.email}</span>
 
-export default Profile;
+          <span className={`profile__global-error ${showConfirmation ? 'profile__confirmation' : ''}`}>
+            {showConfirmation ? 'Данные успешно изменены' : formErrors.global || serverError}
+          </span>
+
+          {showBtnSave && (
+            <>
+              <button className="profile__btn profile__btn_save" type="submit"
+                      disabled={!isFormValid || !isInputChanged}>
+                Сохранить
+              </button>
+              <button className="profile__btn profile__btn_exit" type="button" onClick={handleLogOut}>
+                Выйти из аккаунта
+              </button>
+            </>
+          )}
+
+          {!showBtnSave && (
+            <>
+              <button className="profile__btn" type="button" onClick={handleBtnEditClick}>
+                Редактировать
+              </button>
+              <button className="profile__btn profile__btn_exit" type="button" onClick={handleLogOut}>
+                Выйти из аккаунта
+              </button>
+            </>
+          )}
+        </form>
+      </div>
+    </section>
+  );
+};

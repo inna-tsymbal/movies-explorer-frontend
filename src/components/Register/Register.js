@@ -1,56 +1,112 @@
-import './Register.css';
-import logo from '../../images/logo.svg';
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useFormWithValidation } from '../../hooks/useFormWithValidation';
-import FormInput from '../FormInput/FormInput';
-import { registerInputs } from '../../utils/constants';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../../images/logo.svg";
+import useCustomFormValidation from '../../utils/useCustomFormValidation';
+import {EMAIL_REGEX} from "../../utils/constants";
 
-export default function Register ({registration, loggedIn}) {
-  const [formError, setFormError] = React.useState('');
+export default function Register({ onRegister, serverError, resetServerErrors, isLoggedIn }) {
   const navigate = useNavigate();
-
   const {
-    values,
-    errors,
-    isValid,
-    handleChange,
-    resetForm
-  } = useFormWithValidation();
+    formValues,
+    handleFormChange,
+    formErrors,
+    isFormValid,
+    resetFormState,
+  } = useCustomFormValidation();
 
-  React.useEffect(() => {
-    if (loggedIn) {
-      navigate('/movies', {replace: true});
-    }
-  })
-
-  function handleSubmit(e) {
+  const handleSubmitButton = (e) => {
     e.preventDefault();
-    setFormError('');
-    registration(values.name, values.email, values.password)
-      .then(resetForm())
-      .catch(err => setFormError(err));
-  }
+    onRegister(formValues);
+    resetFormState();
+  };
+
+  useEffect(() => {
+    resetServerErrors();
+  }, [formValues])
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/movies');
+    }
+  }, [isLoggedIn]);
 
   return (
-    <div className='container'>
-      <form className='form' name='register' onSubmit={handleSubmit} noValidate>
-        <Link to='/'>
-          <img className='logo' src={logo} alt='Логотип'/>
+    <section className="register">
+      <div className="register__container" >
+        <Link className="register__logo-link" to="/">
+          <img className="register__logo" src={logo} alt="Логотип" />
         </Link>
-        <h1 className='form__title'>Добро пожаловать!</h1>
-        <div className='form__container'>
-        {registerInputs.map((input) => (
-            <FormInput key={input.id} {...input} values={values} errors={errors} handleChange={handleChange} />
-          ))}
-        </div>
-        <span className='form__error'>{formError}</span>
-        <button className='form__button' disabled={!isValid} type='submit'>Зарегистрироваться</button>
-        <div className='form__link-container'>
-          <p className='form__text'>Уже зарегистрированы?</p>
-          <Link to='/signin' className='form__link'>Войти</Link>
-        </div>
-      </form>
-    </div>
-  )
-}
+        <h1 className="register__title">Добро пожаловать!</h1>
+        <form className="register__form" name="profile" onSubmit={handleSubmitButton}>
+          <label className="register__label">Имя
+            <input
+              className="register__input"
+              placeholder="Ваше имя"
+              name="name"
+              type="text"
+              minLength={2}
+              maxLength={30}
+              required
+              value={formValues.name || ''}
+              onChange={handleFormChange}
+            />
+          </label>
+          <span className="register__input-error">
+            {formErrors.name}
+          </span>
+          <label className="register__label">E-mail
+            <input
+              className="register__input"
+              type="email"
+              onChange={handleFormChange}
+              name="email"
+              placeholder="Email"
+              minLength={6}
+              maxLength={20}
+              required
+              pattern={EMAIL_REGEX}
+              value={formValues.email || ''}
+            />
+          </label>
+          <span className="register__input-error">
+            {formErrors.email}
+          </span>
+          <label className="register__label">Пароль
+            <input
+              className="register__input register__input_password"
+              type="password"
+              onChange={handleFormChange}
+              name="password"
+              placeholder="Пароль"
+              minLength={5}
+              maxLength={15}
+              required
+              value={formValues.password || ''}
+            />
+          </label>
+          <span className="register__input-error">
+            {formErrors.password}
+          </span>
+
+          <span className="register__global-error">
+            {formErrors.global || serverError}
+          </span>
+          <button
+            className="register__btn register__btn_save"
+            type="submit"
+            disabled={!isFormValid}
+          >
+            Зарегистрироваться
+          </button>
+          <div className="register__bottom-container">
+            <p className="register__bottom-container-text">Уже зарегистрированы?</p>
+            <Link className="register__btn register__btn_link" to="/signin">
+              Войти
+            </Link>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+};

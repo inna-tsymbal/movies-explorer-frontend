@@ -1,42 +1,51 @@
-import React from 'react';
 import './SearchForm.css';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Checkbox from "../Checkbox/Checkbox";
 
-export default function SearchForm ({ submitHandler, searchError, activeCheckbox, toggleCheckbox }) {
-  const [inputValue, setInputValue] = React.useState('');
-  const searchFromLocalStorage = localStorage.getItem('search') || '';
-  const location = useLocation();
-  const locationOfMovies = location.pathname === '/movies';
+export default function SearchForm({ searchQuery, onFilter }) {
+  const [searchString, setSearchString] = useState('');
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(searchQuery.isCheckboxChecked || false);
+  const [isEmptyQuery, setIsEmptyQuery] = useState('');
+  const inputPlaceholder = isEmptyQuery ? 'Нужно ввести ключевое слово' : 'Фильм';
 
-  React.useEffect(() => {
-    if (locationOfMovies) {
-      setInputValue(searchFromLocalStorage);
+  useEffect(() => {
+    if (searchQuery.searchString) {
+      setSearchString(searchQuery.searchString);
     }
-  }, [locationOfMovies, searchFromLocalStorage])
+    setIsCheckboxChecked(searchQuery.isCheckboxChecked || false);
+  }, [searchQuery]);
 
-  function onChange(e) {
-    setInputValue(e.target.value);
-  }
+  const handleSearchInput = (e) => { setSearchString(e.target.value) };
 
-  function onSubmit(e) {
+  const changeCheckboxState = () => {
+    setIsCheckboxChecked(!isCheckboxChecked);
+    onFilter({
+      searchString: searchString || searchQuery.searchString || '',
+      isCheckboxChecked: !isCheckboxChecked
+    });
+  };
+
+  const handleSearchSubmit = (e) => {
     e.preventDefault();
-    submitHandler(inputValue);
-    if (locationOfMovies) {
-      localStorage.setItem('search', inputValue);
-    } 
-  }
+    !searchString
+      ? setIsEmptyQuery('Нужно ввести ключевое слово')
+      : onFilter({ searchString, isCheckboxChecked });
+  };
 
   return (
-    <section className='search-form'>
-      <form className='search-form__container' name='search-form' noValidate onSubmit={onSubmit}>
-        <input className='search-form__input' placeholder='Фильм' required type='text' name='search-input' value={inputValue} onChange={onChange}></input>
-        <span className='search-form__error'>{searchError}</span>
-        <button className='search-form__button' type='submit'>Найти</button>
-        <div className='search-form__input-line'></div>
-        <FilterCheckbox activeCheckbox={activeCheckbox} toggleCheckbox={toggleCheckbox} />
+    <section className="search">
+      <form className="search__form" onSubmit={ handleSearchSubmit }>
+        <div className="search__input-container">
+          <input className="search__input" placeholder={inputPlaceholder} name="search" onChange={ handleSearchInput }
+                 value={searchString || ''} min={1}/>
+        </div>
+        <button className='search__btn' type='submit'>Найти</button>
+
+        <div className="search__checkbox-container">
+          <Checkbox isChecked={isCheckboxChecked} onCheck={changeCheckboxState} />
+          <p className="search__shorts">Короткометражки</p>
+        </div>
       </form>
-      <div className='search-form__line'></div>
     </section>
-  )
-}
+  );
+};

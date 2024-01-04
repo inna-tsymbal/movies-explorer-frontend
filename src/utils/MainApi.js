@@ -1,68 +1,79 @@
 class MainApi {
-    constructor({url}) {
-        this._url = url;
-    }
-    
-    _checkResponse(res) {
-        return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    }
+  constructor(options) {
+    this._url = options.baseUrl
+    this._headers = options.headers
+  }
 
-    _request(url, options) {
-        return fetch(url, options).then(this._checkResponse);
-    }
-  
-    getSavedMovies() {
-      return this._request(`${this._url}/movies`, {
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-    }
-  
-    createSavedMovie(dataMovie) {
-        return this._request(`${this._url}/movies`, {
-            credentials: 'include',
-            method: 'POST',
-            body: JSON.stringify(dataMovie),
-            headers: {
-              'Content-Type': 'application/json',
-            }
-        })
-    }
-  
-    deleteMovie(id) {
-        return this._request(`${this._url}/movies/${id}`, {
-            credentials: 'include',
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-        })
-    }
-  
-    getUser() {
-        return this._request(`${this._url}/users/me`, {
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-        })
-    }
-  
-    updateUser(dataUser) {
-        return this._request(`${this._url}/users/me`, {
-            credentials: 'include',
-            method: 'PATCH',
-            body: JSON.stringify(dataUser),
-            headers: {
-              'Content-Type': 'application/json',
-            }
-        })
-    }
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
 }
-  
-  
+
+  getUserData() {
+    return fetch(`${this._url}users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${ localStorage.getItem('token') }`,
+      },
+    })
+      .then(this._checkResponse)
+  }
+
+  sendUserData(profileInputsData) {
+    return fetch(`${this._url}users/me`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${ localStorage.getItem('token') }`,
+      },
+      body: JSON.stringify({
+        name: profileInputsData.name,
+        email: profileInputsData.email,
+        })
+    })
+      .then(this._checkResponse)
+  }
+
+  saveMovie({ ...data }) {
+    return fetch(`${this._url}movies`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${ localStorage.getItem('token') }`,
+      },
+      body: JSON.stringify({...data})
+    })
+      .then(this._checkResponse)
+  }
+
+  deleteMovie(movieId) {
+    return fetch(`${this._url}movies/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${ localStorage.getItem('token') }`,
+      },
+    })
+      .then(this._checkResponse)
+  }
+
+  getSavedMovies() {
+    return fetch(`${this._url}movies`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${ localStorage.getItem('token') }`,
+      },
+    })
+      .then(this._checkResponse)
+  }
+}
+
+
 export const mainApi = new MainApi({
-    url:'https://api.diplom.innatsymbal.nomoredomainsmonster.ru',
-});
+  baseUrl: 'https://api.diplom.innatsymbal.nomoredomainsmonster.ru/',
+  headers: {
+    'Content-Type': 'application/json',
+    authorization: `Bearer ${ localStorage.getItem('token') }`,
+  }
+})

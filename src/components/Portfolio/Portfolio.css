@@ -77,12 +77,13 @@
     padding: 0 50px 90px;
   }
    
-    .portfolio__link-project {
-      font-size: 28px;
+  .portfolio__link-project {
+    font-size: 28px;
   }
+
   .portfolio__link-project:after {
-      top: 57%;
-      right: 3px;
+    top: 57%;
+    right: 3px;
   }
 }
 
@@ -102,7 +103,8 @@
     line-height: 28px;
     letter-spacing: -0.72px;
 }
-.portfolio__link-project:after {
+
+  .portfolio__link-project:after {
     width: 21px;
     height: 11px;
     top: 52%;
