@@ -61,6 +61,7 @@
   right: 14px;
   border: 0;
   border-radius: 30px;
+  background-color: #f9f9f9;
   width: 72px;
   height: 21px;
   text-align: center;
@@ -79,6 +80,7 @@
 }
 
 .movie-card__save-button_type_delete {
+  display: none;
   position: absolute;
   top: 14px;
   right: 14px;
@@ -87,10 +89,13 @@
   height: 21px;
   border-radius: 30px;
   cursor: pointer;
-  background-color:#fff;
-  background: url(../../images/delete-movie.svg);
-
+  background: url(../../images/d3.svg);
 }
+
+.movie-card__image-container:hover .movie-card__save-button_type_delete {
+  display: block;
+}
+
 
 @media (max-width: 768px) {
   .movie-card__image {
@@ -108,6 +113,11 @@
   .movie-card__save-button {
     display: block;
   }
+
+  .movie-card__save-button_type_delete {
+    display: block;
+  }
+
 }
 
 @media (max-width: 425px) {
@@ -122,4 +132,5 @@
   .movie-card__duration {
     margin-right: 0;
   }
+ 
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -37,18 +38,12 @@ export default function SavedMovies({ savedMovies, onDelete, serverError }) {
 
   useEffect(() => {
     const searchedMovies = localStorage.getItem('searchQueryForSavedMoviesPageFiltered');
-    const queries = localStorage.getItem('searchQueryForSavedMoviesPage');
     if (searchedMovies) {
       setFilteredMovies(JSON.parse(searchedMovies));
     } else {
       setFilteredMovies(savedMovies);
     }
 
-    if (queries) {
-      setSearchString(JSON.parse(queries));
-    } else {
-      setSearchString({ searchString: '', isCheckboxChecked: false });
-    }
   }, [savedMovies]);
 
   useEffect(() => {

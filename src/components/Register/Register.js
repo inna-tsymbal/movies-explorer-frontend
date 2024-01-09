@@ -12,13 +12,11 @@ export default function Register({ onRegister, serverError, resetServerErrors, i
     handleFormChange,
     formErrors,
     isFormValid,
-    resetFormState,
   } = useCustomFormValidation();
 
   const handleSubmitButton = (e) => {
     e.preventDefault();
     onRegister(formValues);
-    resetFormState();
   };
 
   useEffect(() => {

@@ -12,13 +12,11 @@ export default function Login({onLogin, serverError, resetServerErrors}) {
     handleFormChange,
     formErrors,
     isFormValid,
-    resetFormState,
   } = useCustomFormValidation();
 
   function handleSubmitButton (e) {
     e.preventDefault()
     onLogin(formValues.email, formValues.password)
-    resetFormState();
   }
 
   useEffect(() => {
