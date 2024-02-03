@@ -1,79 +1,109 @@
 class MainApi {
   constructor(options) {
-    this._url = options.baseUrl
-    this._headers = options.headers
+    this._url = options.baseUrl;
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-}
-
-  getUserData() {
-    return fetch(`${this._url}users/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${ localStorage.getItem('token') }`,
-      },
-    })
-      .then(this._checkResponse)
+    return res.ok ? res.json() : Promise.reject(res.status);
   }
 
-  sendUserData(profileInputsData) {
-    return fetch(`${this._url}users/me`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${ localStorage.getItem('token') }`,
-      },
-      body: JSON.stringify({
-        name: profileInputsData.name,
-        email: profileInputsData.email,
-        })
-    })
-      .then(this._checkResponse)
+  _request(url, options) {
+    return fetch(`${this._url}${url}`, options).then(this._checkResponse);
   }
 
-  saveMovie({ ...data }) {
-    return fetch(`${this._url}movies`, {
+  registration(username, email, password) {
+    return this._request("/signup", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${ localStorage.getItem('token') }`,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({...data})
-    })
-      .then(this._checkResponse)
+      body: JSON.stringify({
+        name: username,
+        email: email,
+        password: password,
+      }),
+    });
   }
 
-  deleteMovie(movieId) {
-    return fetch(`${this._url}movies/${movieId}`, {
-      method: 'DELETE',
+  authorization(email, password) {
+    return this._request("/signin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${ localStorage.getItem('token') }`,
+        "Content-Type": "application/json",
       },
-    })
-      .then(this._checkResponse)
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
   }
 
-  getSavedMovies() {
-    return fetch(`${this._url}movies`, {
-      method: 'GET',
+  getUserData(token) {
+    return this._request("/users/me", {
       headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${ localStorage.getItem('token') }`,
+        Authorization: `Bearer ${token}`,
       },
-    })
-      .then(this._checkResponse)
+    });
+  }
+
+  setUserInfo(username, email, token) {
+    return this._request("/users/me", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: username,
+        email: email,
+      }),
+    });
+  }
+
+  getMovies(token) {
+    return this._request("/movies", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  addMovie(data, token) {
+    return this._request("/movies", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        description: data.description,
+        year: data.year,
+        image: `https://api.nomoreparties.co${data.image.url}`,
+        trailerLink: data.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+        movieId: data.id,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+      }),
+    });
+  }
+
+  deleteMovie(cardId, token) {
+    return this._request(`/movies/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 }
 
+const mainApi = new MainApi({
+  baseUrl: "https://api.diplom.innatsymbal.nomoredomainsmonster.ru",
+});
 
-export const mainApi = new MainApi({
-  baseUrl: 'https://api.diplom.innatsymbal.nomoredomainsmonster.ru/',
-  headers: {
-    'Content-Type': 'application/json',
-    authorization: `Bearer ${ localStorage.getItem('token') }`,
-  }
-})
+export default mainApi;
+
