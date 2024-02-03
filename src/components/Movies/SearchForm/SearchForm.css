@@ -1,0 +1,119 @@
+.search-form {
+  margin: 70px 70px 80px;
+  display: flex;
+  height: 72px;
+  border-radius: 9px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fdfdfd;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.1);
+}
+
+.search-form__input {
+  height: auto;
+  border: 0;
+  width: 67%;
+  background-color: #fdfdfd;
+  color: #000;
+  font-size: 18px;
+  line-height: 20px;
+  outline: none;
+  padding: 0;
+  background-image: url(../../../images/search-icon.svg);
+  background-repeat: no-repeat;
+  background-position: 20px;
+  padding-left: 63px;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.search-form__button {
+  border-radius: 48px;
+  background: #000;
+  width: 59px;
+  border: 0;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 18px;
+  height: 34px;
+  padding: 0;
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
+}
+.search-form__button:hover {
+  opacity: 0.8;
+}
+
+.search-form__button_disabled {
+  pointer-events: none;
+}
+
+.search-form__line {
+  height: 40px;
+  border: 1px solid #cbcbcb;
+  align-self: center;
+  margin: 0 19px 0 10px;
+}
+
+.search-form__error {
+  visibility: hidden;
+  font-family: Inter, Arial, sans-serif;
+  min-height: 14px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  color: red;
+}
+
+.search-form__error_active {
+  visibility: visible;
+}
+
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    margin: 80px 30px 108px;
+  }
+
+  .search-form__input {
+    width: 52%;
+  }
+
+  .search-form__line {
+    margin: 0 19px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .search-form {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 9px;
+    margin: 80px 10px 108px;
+  }
+
+  .search-form__input {
+    padding: 0px;
+    font-size: 14px;
+    background-image: none;
+    width: 67.5%;
+  }
+
+  .search-form__button {
+    width: 59px;
+    margin: 10px 0;
+  }
+
+  .search-form__line {
+    order: 2;
+    border: 0;
+  }
+
+  .search-form__error {
+    position: absolute;
+    top: 185px;
+    left: 80px;
+  }
+}

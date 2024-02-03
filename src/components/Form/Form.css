@@ -1,0 +1,122 @@
+.login__error-request {
+    visibility: hidden;
+    display: block;
+    width: 100%;
+    min-height: 14px;
+    margin-top: 117px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: normal;
+    color: #ff4062;
+}
+
+.login__error-request_active {
+    visibility: visible;
+}
+  
+.login__error-request_type_reg {
+    margin-top: 25px;
+}
+
+.login__submit {
+  padding: 0;
+  margin-top: 20px;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  min-height: 45px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  background-color: #000;
+  color: #f8f8f8;
+  cursor: pointer;
+  transition: background-color 0.3s linear;
+}
+
+.login__submit_disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+  pointer-events: none;
+}
+
+.login__submit:hover {
+  opacity: .7;
+}
+
+.profile__error-request {
+  visibility: hidden;
+  display: block;
+  margin: 166px 0 0 0;
+  min-height: 14px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  color: #ff004c;
+}
+
+.profile__error-request_active {
+  visibility: visible;
+}
+
+.profile__submit {
+  display: block;
+  width: 100%;
+  margin-top: 25px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  font-family: Inter, Arial, sans-serif;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+}
+
+.profile__submit:hover {
+  opacity: .7;
+}
+
+.profile__error-request_type_error {
+  visibility: visible;
+}
+
+.profile__error-request_type_success {
+  visibility: visible;
+  color: #000;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__error-request {
+    margin-top: 157px;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .profile__error-request {
+    margin-top: 325px;
+  }
+
+  .profile__submit {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+    .login__error-request {
+      margin-top: 205px;
+    }
+
+    .login__error-request_type_reg {
+      margin-top: 113px;
+    }
+
+    .login__submit {
+      font-size: 12px;
+    }
+  }
+  

@@ -1,0 +1,47 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.checkbox__click {
+  padding: 0;
+  width: 36px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  background-image: url(../../../images/tumb-off.svg);
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+}
+
+.checkbox__subtitle {
+  margin: 0;
+  padding: 0 29px 0 15px;
+  font-size: 13px;
+  line-height: 18px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.checkbox__click_active {
+  background-image: url(../../../images/tumb-on.svg);
+}
+
+@media screen and (max-width: 770px) {
+  .checkbox__subtitle {
+    padding: 0 20px 0 15px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .checkbox {
+    padding-top: 54px;
+    padding-left: 38px;
+  }
+
+  .checkbox__subtitle {
+    font-size: 11px;
+    padding: 0 0 0 15px;
+  }
+}
